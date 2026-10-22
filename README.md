@@ -1,4 +1,4 @@
-# Ming Mod
+# Test Mod
 
 A [NeoForge](https://neoforged.net/) mod for **Minecraft 1.21.1**.
 

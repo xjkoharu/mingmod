@@ -1,25 +1,46 @@
+# Ming Mod
 
-Installation information
-=======
+A [NeoForge](https://neoforged.net/) mod for **Minecraft 1.21.1**.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+| Item | Value |
+| --- | --- |
+| Minecraft | 1.21.1 |
+| NeoForge | 21.1.264 |
+| Mod ID | `mingmod` |
+| Java | 21 |
+| Gradle | 9.2.1 (wrapper) |
+| ModDevGradle | 2.0.148 |
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+## Build
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+```bash
+./gradlew build          # jar -> build/libs/mingmod-<version>.jar
+./gradlew runClient      # launch a dev client
+./gradlew runServer      # launch a dev server
+./gradlew runData        # run data generation -> src/generated/resources
+```
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+The build requires a JDK 21. Either set `JAVA_HOME` to a JDK 21 install, or let
+Gradle resolve a toolchain automatically.
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+## Layout
+
+```
+src/main/java/com/xjkoharu/mingmod/   Java sources (package = mod_group_id)
+src/main/resources/                   assets, data, lang files
+src/main/templates/META-INF/          neoforge.mods.toml template (properties expanded at build time)
+src/generated/resources/              data generator output (committed)
+```
+
+Version and metadata live in `gradle.properties`; `neoforge.mods.toml` is a
+template whose `${...}` placeholders are filled from that file.
+
+## Notes for contributors in mainland China
+
+`maven.neoforged.net` is often unreachable. A **machine-local** Gradle init
+script can redirect it to a reachable mirror; see `docs/network-zh.md`. Nothing
+in this repository hardcodes a mirror URL.
+
+## License
+
+All Rights Reserved. See `LICENSE`.
